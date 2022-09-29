@@ -8,8 +8,15 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
+  html {
+    font-size: 62.5%;
+  }
+
   body {
+    font-size: 1.6rem;
     font-family: ${({ theme }) => theme.font};
+    color: ${({ theme }) => theme.colors.text};
+    background-color: ${({ theme }) => theme.colors.backgrounds.main};
   }
 
   input, select, button {
