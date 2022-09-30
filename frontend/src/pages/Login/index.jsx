@@ -27,16 +27,15 @@ export default function Login() {
           <form className="form-login" onSubmit={handleSubmit} noValidate>
             <div className="form-inputs">
               <Input
+                value="oi"
                 className="form-input"
                 type="email"
                 placeholder="E-mail"
-                error="Email obrigatório"
               />
               <Input
                 className="form-input"
                 type="password"
                 placeholder="Senha"
-                error="Senha obrigatória"
               />
             </div>
             <div className="form-actions">

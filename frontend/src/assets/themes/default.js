@@ -28,6 +28,7 @@ export default {
     },
     disabled: {
       background: 'rgba(201, 201, 201, 0.5)',
+      darkBackground: 'rgba(150, 150, 150, 0.25)',
       text: 'rgba(238, 238, 238, 0.7)',
     },
     danger: {
