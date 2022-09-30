@@ -62,17 +62,15 @@ export const Container = styled.div`
 
       width: 100%;
 
-      a {
+      .form-lost-password {
         text-decoration: none;
 
-        small {
-          font-size: 1.6rem;
-          color: rgba(255, 255, 255, 0.65);
-          transition: color 70ms ease-in;
-  
-          &:hover {
-            color: #eee;
-          }
+        font-size: 1.4rem;
+        color: rgba(255, 255, 255, 0.4);
+        transition: color 70ms ease-in;
+
+        &:hover {
+          color: #eee;
         }
       }
 

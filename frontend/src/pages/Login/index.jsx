@@ -27,7 +27,6 @@ export default function Login() {
           <form className="form-login" onSubmit={handleSubmit} noValidate>
             <div className="form-inputs">
               <Input
-                value="oi"
                 className="form-input"
                 type="email"
                 placeholder="E-mail"
@@ -40,7 +39,7 @@ export default function Login() {
             </div>
             <div className="form-actions">
               <a href="/" className="form-lost-password">
-                <small>Esqueci a senha :(</small>
+                Esqueci a senha :(
               </a>
               <div className="form-main-actions">
                 <Link to="/register" className="form-no-account">
