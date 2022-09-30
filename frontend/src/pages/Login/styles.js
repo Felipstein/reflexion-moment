@@ -62,9 +62,11 @@ export const Container = styled.div`
 
       width: 100%;
 
-      .form-lost-password {
+      a {
         text-decoration: none;
+      }
 
+      .form-lost-password {
         font-size: 1.4rem;
         color: rgba(255, 255, 255, 0.4);
         transition: color 70ms ease-in;
