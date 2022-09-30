@@ -27,8 +27,8 @@ export default {
       main: '#C9CBA3',
     },
     disabled: {
-      background: 'rgba(201, 201, 201, 0.58)',
-      text: 'rgba(238, 238, 238, 0.83)',
+      background: 'rgba(201, 201, 201, 0.5)',
+      text: 'rgba(238, 238, 238, 0.7)',
     },
     danger: {
       main: '#FF5959',

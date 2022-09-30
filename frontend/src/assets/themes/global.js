@@ -23,4 +23,22 @@ export default createGlobalStyle`
     font-family: inherit;
   }
 
+  .app__box-shadow {
+    box-shadow: ${({ theme }) => theme.effects.boxShadow};
+  }
+
+  .app__drop-shadow {
+    filter: drop-shadow(${({ theme }) => theme.effects.boxShadow});
+  }
+
+  .app__text-shadow {
+    text-shadow: ${({ theme }) => theme.effects.textShadow};
+  }
+
+  .app__flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
 `;

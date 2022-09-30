@@ -6,8 +6,10 @@ export const Wrapper = styled.div`
       position, top, left, transform,
     },
   }) => css`
-    width: ${size}px;
-    height: ${size}px;
+    img {
+      width: ${size};
+      height: ${size};
+    }
 
     position: ${position};
     top: ${top};

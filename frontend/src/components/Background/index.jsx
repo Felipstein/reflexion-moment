@@ -14,17 +14,18 @@ export default function Background({ size, location }) {
 }
 
 Background.propTypes = {
-  size: PropTypes.number,
+  size: PropTypes.string,
   location: PropTypes.shape({
-    position: PropTypes.oneOf(['static', 'relative', 'absolute', 'fixed']),
+    position: PropTypes.oneOf(['static', 'fixed', 'absolute', 'relative', 'sticky', '-webkit-sticky', '-ms-page']),
     top: PropTypes.string,
     left: PropTypes.string,
-    transform: PropTypes.string,
+    right: PropTypes.string,
+    bottom: PropTypes.string,
   }),
 };
 
 Background.defaultProps = {
-  size: 360,
+  size: '36rem',
   location: {
     position: 'fixed',
     top: '50%',
