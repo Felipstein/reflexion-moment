@@ -8,7 +8,7 @@ import Logo from '../../components/Logo';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import api from '../../api';
-
+import EventManager from '../../libs/EventManager';
 import useInputErrors from '../../hooks/useInputErrors';
 import isEmailValid from '../../utils/isEmailValid';
 import delay from '../../utils/delay';
@@ -108,16 +108,17 @@ export default function Login() {
         email, password,
       });
       // amarzenar token e usuario num context Auth
-      console.log(data);
+
+      EventManager.emit('addtoast', { content: JSON.stringify(data) });
     } catch (err) {
       const { data } = err.response;
 
       if (!data) {
-        console.log('Servidor não respondendo');
+        EventManager.emit('addtoast', { type: 'warn', content: 'Nossos servidores não estão respondendo no momento, tente novamente mais tarde' });
         return;
       }
 
-      console.log(data.error);
+      EventManager.emit('addtoast', { type: 'warn', content: data.error });
     } finally {
       setIsLoading(false);
     }

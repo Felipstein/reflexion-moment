@@ -50,11 +50,11 @@ export const Container = styled(motion.div)`
   ${({ type }) => variant[type]}
 
   @media screen and (max-width: 540px) {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
 
     #icon {
-      width: 2.4rem;
-      height: 2.4rem;
+      width: 2rem;
+      height: 2rem;
     }
   }
 `;

@@ -4,7 +4,7 @@ class EventManager {
   }
 
   emit(event, payload) {
-    if(!this.listeners.has(event)) {
+    if (!this.listeners.has(event)) {
       return;
     }
 
@@ -24,12 +24,12 @@ class EventManager {
   }
 
   removeListener(event, listenerToRemove) {
-    if(!this.listeners.has(event)) {
+    if (!this.listeners.has(event)) {
       return;
     }
 
     const listenersFiltered = this.listeners.get(event).filter((listener) => (
-      listener !== listenerToRemove,
+      listener !== listenerToRemove
     ));
 
     this.listeners.set(event, listenersFiltered);
