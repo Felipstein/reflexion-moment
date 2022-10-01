@@ -33,6 +33,7 @@ export default {
     },
     danger: {
       main: '#FF5959',
+      dark: '#DD3939',
     },
 
   },

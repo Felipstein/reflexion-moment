@@ -18,4 +18,5 @@ export const Wrapper = styled.div`
   `}
 
   z-index: -1;
+  user-select: none;
 `;
