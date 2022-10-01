@@ -98,11 +98,15 @@ export default function Login() {
       setIsLoading(true);
 
       await delay(1000);
-      const data = await api.post('/auth');
-
+      const { data } = await api.post('/auth', {
+        email, password,
+      });
+      // amarzenar token e usuario num context Auth
       console.log(data);
     } catch (err) {
-      console.log(err);
+      const { error } = err.response.data;
+
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
