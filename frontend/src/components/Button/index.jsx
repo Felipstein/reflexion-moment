@@ -10,6 +10,8 @@ export default function Button({
 }) {
   const theme = useTheme();
 
+  const loadingString = loading ? 'true' : '';
+
   return (
     <ButtonStyled
       whileHover={!disabled && !loading && { scale: 1.05 }}
@@ -21,7 +23,7 @@ export default function Button({
       }}
       variant={variant}
       disabled={disabled || loading}
-      loading={loading}
+      loading={loadingString}
       {...rest}
     >
       <div className="children">

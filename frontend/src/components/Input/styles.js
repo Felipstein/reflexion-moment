@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
     color: ${({ theme }) => theme.colors.text};
     box-shadow: ${({ theme }) => theme.effects.boxShadow};
     background-color: rgba(0, 0, 0, 0.3);
-    padding: 12px 16px;
+    padding: 1.2rem 1.6rem;
     transition-property: border-color, color;
     transition: 0.15s ease-in-out;
 

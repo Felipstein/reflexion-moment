@@ -6,8 +6,6 @@ import * as S from './styles';
 export default function Overlay({
   location, rgba, blur, zIndex,
 }) {
-  console.log(location, rgba, blur, zIndex);
-
   return (
     <S.Overlay
       location={location}

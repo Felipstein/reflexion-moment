@@ -41,4 +41,16 @@ export default createGlobalStyle`
     align-items: center;
   }
 
+  @media (max-height: 950px) {
+    html {
+      font-size: 50%;
+    }    
+  }
+
+  @media (max-width: 1024px) {
+    html {
+      font-size: 50%;
+    }    
+  }
+
 `;
