@@ -7,6 +7,7 @@ import Background from '../../components/Background';
 import Logo from '../../components/Logo';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import api from '../../api';
 
 import useInputErrors from '../../hooks/useInputErrors';
 import isEmailValid from '../../utils/isEmailValid';
@@ -93,9 +94,18 @@ export default function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    setIsLoading(true);
-    await delay(2000);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+
+      await delay(1000);
+      const data = await api.post('/auth');
+
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (

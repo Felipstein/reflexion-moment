@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 
 const UsersRepository = require('./repositories/UsersRepository');
 const CryptService = require('./services/CryptService');
@@ -7,8 +8,12 @@ const route = require('./routes');
 
 const app = express();
 const port = 3333;
+const corsOptions = {
+  origin: 'http://localhost:3000',
+};
 
 app.use(express.json());
+app.use(cors(corsOptions));
 app.use(route);
 
 // eslint-disable-next-line no-console
