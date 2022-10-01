@@ -104,9 +104,14 @@ export default function Login() {
       // amarzenar token e usuario num context Auth
       console.log(data);
     } catch (err) {
-      const { error } = err.response.data;
+      const { data } = err.response;
 
-      console.log(error);
+      if (!data) {
+        console.log('Servidor não respondendo');
+        return;
+      }
+
+      console.log(data.error);
     } finally {
       setIsLoading(false);
     }
