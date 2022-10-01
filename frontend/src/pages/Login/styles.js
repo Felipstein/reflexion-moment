@@ -132,4 +132,44 @@ export const Container = styled(motion.div)`
       }
     }
   }
+
+  @media screen and (max-width: 560px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 460px) {
+    padding: 2rem 1.8rem;
+
+    .wrapped-content {
+      h1 {
+        font-size: 2.8rem;
+      }
+
+      p {
+        width: 100%;
+        font-size: 1.4rem;
+      }
+
+      .form-no-account span {
+        font-size: 1.6rem !important;
+      }
+    }
+  }
+
+  @media screen and (max-width: 380px) {
+    .wrapped-content {
+      h1 {
+        font-size: 2.4rem;
+      }
+
+      .form-main-actions {
+        flex-direction: column !important;
+
+        .form-no-account {
+          margin-top: 1rem;
+          margin-bottom: 0.8rem;
+        }
+      }
+    }
+  }
 `;

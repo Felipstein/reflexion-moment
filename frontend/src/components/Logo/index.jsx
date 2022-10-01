@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import * as S from './styles';
 
-export default function Logo({ isBig }) {
+export default function Logo({ scale, mediaQueries }) {
   return (
-    <S.Container isBig={isBig}>
+    <S.Container scale={scale} mediaQueries={mediaQueries}>
       <h1>
         Momento de
         <strong>Reflexão</strong>
@@ -15,9 +15,11 @@ export default function Logo({ isBig }) {
 }
 
 Logo.propTypes = {
-  isBig: PropTypes.bool,
+  scale: PropTypes.number,
+  mediaQueries: PropTypes.func,
 };
 
 Logo.defaultProps = {
-  isBig: false,
+  scale: 1,
+  mediaQueries: null,
 };

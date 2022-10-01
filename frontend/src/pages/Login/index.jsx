@@ -133,7 +133,7 @@ export default function Login() {
             },
           }}
         >
-          <Logo isBig />
+          <Logo scale={1.7} />
         </motion.div>
         <Container
           as={motion.div}
