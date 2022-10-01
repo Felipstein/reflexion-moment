@@ -206,7 +206,7 @@ export default function Login() {
                     as={motion.a}
                     variants={childVariants}
                     to="/register"
-                    className="form-no-account disabled"
+                    className={`form-no-account${isLoading ? ' disabled' : ''}`}
                     disabled={isLoading}
                   >
                     <span className="app__text-shadow">Não tenho uma conta</span>
