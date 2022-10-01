@@ -81,14 +81,20 @@ export default function Login() {
         field: 'email',
         message: 'Informe o e-mail que deseja recuperar a senha',
       });
-    } else if (!isEmailValid(email)) {
+
+      return;
+    } if (!isEmailValid(email)) {
       setError({
         field: 'email',
         message: 'Informe um e-mail válido',
       });
-    } else {
-      removeError('email');
+
+      return;
     }
+
+    removeError('email');
+
+    console.log('lol');
   }
 
   async function handleSubmit(event) {
@@ -196,6 +202,7 @@ export default function Login() {
                 <motion.button
                   variants={childVariants}
                   className="form-lost-password"
+                  type="button"
                   onClick={handleLostPassword}
                   disabled={isLoading}
                 >
