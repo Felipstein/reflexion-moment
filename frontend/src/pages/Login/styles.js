@@ -31,13 +31,13 @@ export const Container = styled(motion.div)`
     align-items: center;
 
     width: 100%;
-  
+
     h1 {
       font-weight: 500;
       margin-bottom: 1.2rem;
       font-size: 3.2rem;
     }
-  
+
     p {
       color: #eeeeeeaa;
       width: 50%;
@@ -45,35 +45,35 @@ export const Container = styled(motion.div)`
       text-align: center;
       font-size: 1.8rem;
     }
-  
+
     .form-login {
       display: flex;
       flex-direction: column;
       align-items: center;
-  
+
       width: 100%;
-  
+
       .form-inputs {
         width: 100%;
         margin-bottom: 0.6rem;
-  
+
         .form-input {
           width: 100%;
           margin-top: 1.2rem;
         }
       }
-  
+
       .form-actions {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-  
+
         width: 100%;
-  
+
         a {
           text-decoration: none;
         }
-  
+
         .form-lost-password {
           outline: 0;
           border: none;
@@ -82,31 +82,50 @@ export const Container = styled(motion.div)`
           font-size: 1.4rem;
           color: rgba(255, 255, 255, 0.4);
           transition: color 70ms ease-in;
-  
+
           &:hover {
             color: #eee;
           }
+
+          &[disabled] {
+            color: rgba(255, 255, 255, 0.2) !important;
+            cursor: default;
+            pointer-events: none;
+          }
         }
-  
+
         .form-main-actions {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
           align-items: center;
-  
+
           width: 100%;
           margin-top: 2rem;
-  
-          .form-no-account span {
-            font-size: 1.8rem;
-            color: #ddd;
-            border-bottom: 2px solid transparent;
-            transition-property: color, border-color;
-            transition: 70ms ease-in;
-  
-            &:hover {
-              color: #fff;
-              border-color: #ffffffaa;
+
+          .form-no-account {
+
+            &.disabled {
+              cursor: default;
+              pointer-events: none;
+
+              span {
+                color: rgba(255, 255, 255, 0.6);
+              }
+            }
+
+            span {
+              font-size: 1.8rem;
+              color: #ddd;
+              border-bottom: 2px solid transparent;
+              transition-property: color, border-color;
+              transition: 70ms ease-in;
+
+              &:hover {
+                color: #fff;
+                border-color: #ffffffaa;
+              }
+
             }
           }
         }

@@ -178,6 +178,7 @@ export default function Login() {
                   value={email}
                   onChange={handleEmailChange}
                   error={getMessageError('email')}
+                  disabled={isLoading}
                 />
                 <Input
                   as={motion.div}
@@ -188,6 +189,7 @@ export default function Login() {
                   value={password}
                   onChange={handlePasswordChange}
                   error={getMessageError('password')}
+                  disabled={isLoading}
                 />
               </div>
               <div className="form-actions">
@@ -195,6 +197,7 @@ export default function Login() {
                   variants={childVariants}
                   className="form-lost-password"
                   onClick={handleLostPassword}
+                  disabled={isLoading}
                 >
                   Esqueci a senha :(
                 </motion.button>
@@ -203,7 +206,8 @@ export default function Login() {
                     as={motion.a}
                     variants={childVariants}
                     to="/register"
-                    className="form-no-account"
+                    className="form-no-account disabled"
+                    disabled={isLoading}
                   >
                     <span className="app__text-shadow">Não tenho uma conta</span>
                   </Link>
