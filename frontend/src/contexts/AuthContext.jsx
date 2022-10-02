@@ -4,44 +4,50 @@ import React, {
 import PropType from 'prop-types';
 
 import api from '../api';
+import delay from '../utils/delay';
 import APIError from '../errors/APIError';
 
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [isValidatingToken, setIsValidatingToken] = useState(false);
 
   const authManager = useMemo(() => ({
-    authenticated: !!user, user, register, login, logout,
-  }), [user]);
+    authenticated: !!user, user, register, login, logout, isValidatingToken,
+  }), [user, isValidatingToken]);
 
   useEffect(() => {
     async function validateToken() {
       const token = getToken();
 
-      const result = await api.post('/auth/validate', { token });
-
-      console.log({ result });
-
       if (token) {
-        api.defaults.headers.common.Authorization = `Bearer ${token}`;
-      }
+        setIsValidatingToken(true);
+        await delay(2000);
+        const { data: { user: userData } } = await api.post('/auth/validate', { token });
 
-      console.log({
-        useEffect: {
-          token, authrozation: api.defaults.headers.common.Authorization,
-        },
-      });
+        setUser(userData);
+        api.defaults.headers.common.Authorization = `Bearer ${token}`;
+        setIsValidatingToken(false);
+      }
     }
 
     validateToken();
   }, []);
 
-  function register({
-    // eslint-disable-next-line no-unused-vars
+  async function register({
     name, email, password, confirmPassword,
   }) {
+    try {
+      const { data: { user: userData, token } } = await api.post('auth/register', {
+        name, email, password, confirmPassword,
+      });
 
+      setToken(token);
+      setUser(userData);
+    } catch (err) {
+      throw new APIError(err);
+    }
   }
 
   async function login({ email, password }) {
@@ -50,15 +56,6 @@ export default function AuthProvider({ children }) {
 
       setToken(token);
       setUser(userData);
-
-      console.log({
-        authenticated: !!user,
-        user,
-        token,
-        auhtorization: api.defaults.headers.common.Authorization,
-      });
-
-      return userData;
     } catch (err) {
       throw new APIError(err);
     }

@@ -10,11 +10,15 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 
 function PrivateRoute({ children }) {
-  const { authenticated, user } = useContext(AuthContext);
-
-  console.log({ authenticated, user });
+  const { authenticated } = useContext(AuthContext);
 
   return authenticated ? children : <Navigate to="/login" />;
+}
+
+function AuthRoute({ children }) {
+  const { authenticated } = useContext(AuthContext);
+
+  return !authenticated ? children : <Navigate to="/" />;
 }
 
 export default function MainRoutes() {
@@ -26,11 +30,25 @@ export default function MainRoutes() {
           <PrivateRoute>
             <Home />
           </PrivateRoute>
-      )}
+        )}
       />
 
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      <Route
+        path="/login"
+        element={(
+          <AuthRoute>
+            <Login />
+          </AuthRoute>
+        )}
+      />
+      <Route
+        path="/register"
+        element={(
+          <AuthRoute>
+            <Register />
+          </AuthRoute>
+        )}
+      />
 
       <Route
         path="*"

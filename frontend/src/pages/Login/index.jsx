@@ -11,9 +11,9 @@ import EventManager from '../../libs/EventManager';
 import useInputErrors from '../../hooks/useInputErrors';
 import isEmailValid from '../../utils/isEmailValid';
 import delay from '../../utils/delay';
+import { AuthContext } from '../../contexts/AuthContext';
 
 import { Container, Wrapper } from './styles';
-import { AuthContext } from '../../contexts/AuthContext';
 
 const childVariants = {
   init: {
@@ -103,11 +103,9 @@ export default function Login() {
       setIsLoading(true);
 
       await delay(1000);
-      const user = await login({ email, password });
+      await login({ email, password });
 
-      console.log(user);
-
-      EventManager.emit('addtoast', { content: `Bem-vindo(a) de volta ${user.name}` });
+      EventManager.emit('addtoast', { content: 'Bem-vindo(a) de volta' });
     } catch (err) {
       EventManager.emit('addtoast', { type: 'warn', content: err.message });
     } finally {
