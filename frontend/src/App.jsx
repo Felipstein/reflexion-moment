@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import defaultTheme from './assets/themes/default';
 import GlobalStyle from './assets/themes/global';
 import ToastsContainer from './containers/ToastsContainer';
+import AuthProvider from './contexts/AuthContext';
 import Routes from './Routes';
 
 function App() {
@@ -12,8 +13,10 @@ function App() {
     <Router>
       <ThemeProvider theme={defaultTheme}>
         <GlobalStyle />
-        <ToastsContainer />
-        <Routes />
+        <AuthProvider>
+          <ToastsContainer />
+          <Routes />
+        </AuthProvider>
       </ThemeProvider>
     </Router>
   );

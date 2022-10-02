@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -7,13 +7,13 @@ import Background from '../../components/Background';
 import Logo from '../../components/Logo';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import api from '../../api';
 import EventManager from '../../libs/EventManager';
 import useInputErrors from '../../hooks/useInputErrors';
 import isEmailValid from '../../utils/isEmailValid';
 import delay from '../../utils/delay';
 
 import { Container, Wrapper } from './styles';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const childVariants = {
   init: {
@@ -37,6 +37,7 @@ export default function Login() {
   const {
     errors, setError, removeError, getMessageError,
   } = useInputErrors();
+  const { login } = useContext(AuthContext);
 
   const isFormValid = errors.length === 0 && email && password;
 
@@ -93,8 +94,6 @@ export default function Login() {
     }
 
     removeError('email');
-
-    console.log('lol');
   }
 
   async function handleSubmit(event) {
@@ -104,21 +103,13 @@ export default function Login() {
       setIsLoading(true);
 
       await delay(1000);
-      const { data } = await api.post('/auth', {
-        email, password,
-      });
-      // amarzenar token e usuario num context Auth
+      const user = await login({ email, password });
 
-      EventManager.emit('addtoast', { content: JSON.stringify(data) });
+      console.log(user);
+
+      EventManager.emit('addtoast', { content: `Bem-vindo(a) de volta ${user.name}` });
     } catch (err) {
-      const { data } = err.response;
-
-      if (!data) {
-        EventManager.emit('addtoast', { type: 'warn', content: 'Nossos servidores não estão respondendo no momento, tente novamente mais tarde' });
-        return;
-      }
-
-      EventManager.emit('addtoast', { type: 'warn', content: data.error });
+      EventManager.emit('addtoast', { type: 'warn', content: err.message });
     } finally {
       setIsLoading(false);
     }

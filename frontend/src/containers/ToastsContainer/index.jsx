@@ -32,6 +32,7 @@ export default function ToastsContainer() {
         {toasts.map((toast) => (
           <Toast
             key={toast.id}
+            id={toast.id}
             type={toast.type}
             duration={toast.duration}
             onRemoveToast={() => handleRemoveToast(toast.id)}
