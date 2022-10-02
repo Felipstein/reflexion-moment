@@ -8,6 +8,7 @@ const route = Router();
 
 route.post('/auth', AuthController.authenticate);
 route.post('/auth/register', AuthController.register);
+route.post('/auth/validate', AuthController.validate);
 
 route.get('/users', authMiddleware, UserController.index);
 route.get('/users/:id', authMiddleware, UserController.show);

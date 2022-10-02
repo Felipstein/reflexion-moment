@@ -68,6 +68,26 @@ class AuthController {
 
     return res.json({ user, token });
   }
+
+  validate(req, res) {
+    const { token } = req.body;
+
+    if (!token) {
+      return res.sendStatus(401);
+    }
+
+    try {
+      jwt.verify(token, process.env.SECRET_KEY);
+
+      const data = jwt.decode(token);
+
+      console.log(data);
+
+      return res.json(token);
+    } catch {
+      return res.sendStatus(401);
+    }
+  }
 }
 
 module.exports = new AuthController();
