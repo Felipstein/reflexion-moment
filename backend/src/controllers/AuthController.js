@@ -69,7 +69,7 @@ class AuthController {
     return res.json({ user, token });
   }
 
-  validate(req, res) {
+  async validate(req, res) {
     const { token } = req.body;
 
     if (!token) {
@@ -79,11 +79,19 @@ class AuthController {
     try {
       jwt.verify(token, process.env.SECRET_KEY);
 
-      const data = jwt.decode(token);
+      const { userId } = jwt.decode(token);
 
-      console.log(data);
+      if (!userId) {
+        return res.sendStatus(401);
+      }
 
-      return res.json(token);
+      const user = await UsersRepository.findById(userId);
+
+      if (!user) {
+        return res.sendStatus(404);
+      }
+
+      return res.json({ user });
     } catch {
       return res.sendStatus(401);
     }

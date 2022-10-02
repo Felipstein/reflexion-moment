@@ -16,13 +16,25 @@ export default function AuthProvider({ children }) {
   }), [user]);
 
   useEffect(() => {
-    const token = getToken();
+    async function validateToken() {
+      const token = getToken();
 
-    if (token) {
-      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      const result = await api.post('/auth/validate', { token });
+
+      console.log({ result });
+
+      if (token) {
+        api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      }
+
+      console.log({
+        useEffect: {
+          token, authrozation: api.defaults.headers.common.Authorization,
+        },
+      });
     }
 
-    console.log({ useEffect: { token, authrozation: api.defaults.headers.common.Authorization } });
+    validateToken();
   }, []);
 
   function register({
