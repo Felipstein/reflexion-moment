@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 
 import * as S from './styles';
 
-export default function Logo({ scale, mediaQueries }) {
+export default function Logo({ scale, blackWhite }) {
   return (
-    <S.Container scale={scale} mediaQueries={mediaQueries}>
+    <S.Container
+      scale={scale}
+      blackWhite={blackWhite}
+    >
       <h1>
         Momento de
         <strong>Reflexão</strong>
@@ -16,10 +19,10 @@ export default function Logo({ scale, mediaQueries }) {
 
 Logo.propTypes = {
   scale: PropTypes.number,
-  mediaQueries: PropTypes.func,
+  blackWhite: PropTypes.bool,
 };
 
 Logo.defaultProps = {
   scale: 1,
-  mediaQueries: null,
+  blackWhite: false,
 };

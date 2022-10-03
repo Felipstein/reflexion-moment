@@ -22,13 +22,18 @@ export default function AuthProvider({ children }) {
       const token = getToken();
 
       if (token) {
-        setIsValidatingToken(true);
-        await delay(2000);
-        const { data: { user: userData } } = await api.post('/auth/validate', { token });
+        try {
+          setIsValidatingToken(true);
+          await delay(2000);
+          const { data: { user: userData } } = await api.post('/auth/validate', { token });
 
-        setUser(userData);
-        api.defaults.headers.common.Authorization = `Bearer ${token}`;
-        setIsValidatingToken(false);
+          setUser(userData);
+          api.defaults.headers.common.Authorization = `Bearer ${token}`;
+        } catch {
+          removeToken();
+        } finally {
+          setIsValidatingToken(false);
+        }
       }
     }
 

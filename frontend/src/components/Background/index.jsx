@@ -5,9 +5,9 @@ import { images } from '../../constants';
 
 import * as S from './styles';
 
-export default function Background({ size, location }) {
+export default function Background({ size, location, zIndex }) {
   return (
-    <S.Wrapper size={size} location={location}>
+    <S.Wrapper size={size} location={location} zIndex={zIndex}>
       <img src={images.background} alt="Background" />
     </S.Wrapper>
   );
@@ -22,6 +22,7 @@ Background.propTypes = {
     right: PropTypes.string,
     bottom: PropTypes.string,
   }),
+  zIndex: PropTypes.number,
 };
 
 Background.defaultProps = {
@@ -32,4 +33,5 @@ Background.defaultProps = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
   },
+  zIndex: -1,
 };

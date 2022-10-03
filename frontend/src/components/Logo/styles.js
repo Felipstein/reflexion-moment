@@ -10,7 +10,7 @@ export const Container = styled.div`
     strong {
       display: block;
 
-      color: #FFE1A8;
+      color: ${({ blackWhite }) => (blackWhite ? '#82889e' : '#FFE1A8')};
       font-weight: 600;
     }
   }
@@ -25,7 +25,4 @@ export const Container = styled.div`
       }
     }
   `}
-
-  ${({ mediaQueries }) => mediaQueries}
-
 `;

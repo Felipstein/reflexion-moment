@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(motion.div)`
   ${({
     size, location: {
       position, top, left, transform,
@@ -17,6 +18,6 @@ export const Wrapper = styled.div`
     transform: ${transform};
   `}
 
-  z-index: -1;
+  z-index: ${({ zIndex }) => zIndex};
   user-select: none;
 `;
