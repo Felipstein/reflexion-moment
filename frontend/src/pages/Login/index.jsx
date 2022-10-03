@@ -1,79 +1,38 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import toast from '../../utils/toast';
-import Input from '../../components/Input';
 import AuthForm from '../../containers/AuthForm';
 import delay from '../../utils/delay';
 import isEmailValid from '../../utils/isEmailValid';
-import useInputErrors from '../../hooks/useInputErrors';
 import { AuthContext } from '../../contexts/AuthContext';
 import Button from '../../components/Button';
+import useAuthForm from '../../hooks/useAuthForm';
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const {
-    errors, setError, removeError, getMessageError,
-  } = useInputErrors();
+    email, password, isFormValid,
+  } = useAuthForm({ nameInput: false, confirmPasswordInput: false });
   const { login } = useContext(AuthContext);
 
-  const isFormValid = errors.length === 0 && email && password;
-
-  function handleEmailChange(event) {
-    const { value } = event.target;
-
-    if (!value) {
-      setError({
-        field: 'email',
-        message: 'E-mail é obrigatório',
-      });
-    } else if (!isEmailValid(value)) {
-      setError({
-        field: 'email',
-        message: 'E-mail inválido',
-      });
-    } else {
-      removeError('email');
-    }
-
-    setEmail(value);
-  }
-
-  function handlePasswordChange(event) {
-    const { value } = event.target;
-
-    if (!value) {
-      setError({
-        field: 'password',
-        message: 'Senha é obrigatória',
-      });
-    } else {
-      removeError('password');
-    }
-
-    setPassword(value);
-  }
+  useEffect(() => {
+    email.disabled(isLoading);
+    password.disabled(isLoading);
+  }, [isLoading]);
 
   function handleLostPassword() {
-    if (!email) {
-      setError({
-        field: 'email',
-        message: 'Informe o e-mail que deseja recuperar a senha',
-      });
+    if (!email.value) {
+      email.feedback.throwError('Informe o e-mail que deseja recuperar a senha');
 
       return;
-    } if (!isEmailValid(email)) {
-      setError({
-        field: 'email',
-        message: 'Informe um e-mail válido',
-      });
+    } if (!isEmailValid(email.value)) {
+      email.feedback.throwError('Informe um e-mail válido');
 
       return;
     }
 
-    removeError('email');
+    email.feedback.removeError();
   }
 
   async function handleSubmit(event) {
@@ -83,7 +42,7 @@ export default function Login() {
       setIsLoading(true);
 
       await delay(1000);
-      await login({ email, password });
+      await login({ email: email.value, password: password.value });
     } catch (err) {
       toast({ type: 'warn', content: err.message });
     } finally {
@@ -97,24 +56,8 @@ export default function Login() {
       subTitle="Espero que tenha ótimas inspirações para hoje :)"
       inputs={(
         <>
-          <Input
-            className="form-input"
-            type="email"
-            placeholder="E-mail"
-            value={email}
-            onChange={handleEmailChange}
-            error={getMessageError('email')}
-            disabled={isLoading}
-          />
-          <Input
-            className="form-input"
-            type="password"
-            placeholder="Senha"
-            value={password}
-            onChange={handlePasswordChange}
-            error={getMessageError('password')}
-            disabled={isLoading}
-          />
+          {email.inputComponent}
+          {password.inputComponent}
         </>
       )}
       subActions={(
@@ -131,7 +74,7 @@ export default function Login() {
         <>
           <Link
             to="/register"
-            className={`form-no-account${isLoading ? ' disabled' : ''}`}
+            className={`form-about-account${isLoading ? ' disabled' : ''}`}
             disabled={isLoading}
           >
             <span className="app__text-shadow">Não tenho uma conta</span>

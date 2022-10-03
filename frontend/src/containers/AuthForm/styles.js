@@ -103,7 +103,7 @@ export const Container = styled(motion.div)`
           width: 100%;
           margin-top: 2rem;
 
-          .form-no-account {
+          .form-about-account {
 
             &.disabled {
               cursor: default;
@@ -150,7 +150,7 @@ export const Container = styled(motion.div)`
         font-size: 1.4rem;
       }
 
-      .form-no-account span {
+      .form-about-account span {
         font-size: 1.6rem !important;
       }
     }
@@ -165,7 +165,7 @@ export const Container = styled(motion.div)`
       .form-main-actions {
         flex-direction: column !important;
 
-        .form-no-account {
+        .form-about-account {
           margin-top: 1rem;
           margin-bottom: 0.8rem;
         }
