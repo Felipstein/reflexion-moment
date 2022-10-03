@@ -1,6 +1,6 @@
 const uuid = require('uuid-v4');
 
-let { users } = require('../mocks');
+let { users } = require('../../mocks');
 
 class UsersRepository {
   findAll() {

@@ -5,7 +5,7 @@ const UsersRepository = require('../repositories/UsersRepository');
 class UserController {
   async index(req, res) {
     const users = await UsersRepository.findAll();
-
+    ssss;
     res.json(users);
   }
 

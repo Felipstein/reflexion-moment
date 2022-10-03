@@ -2,8 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
-const UsersRepository = require('./repositories/UsersRepository');
-const CryptService = require('./services/CryptService');
+const UsersRepository = require('./app/repositories/UsersRepository');
+const CryptService = require('./app/services/CryptService');
 const route = require('./routes');
 
 const app = express();
