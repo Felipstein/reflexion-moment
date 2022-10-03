@@ -194,7 +194,7 @@ export default function useAuthForm(
   }
 
   return {
-    name: {
+    name: nameInput && {
       value: name,
       inputComponent: InputComponents.name,
       feedback: feedbackFactory('name'),
@@ -202,7 +202,7 @@ export default function useAuthForm(
         setNameInputDisabled(isDisabled);
       },
     },
-    email: {
+    email: emailInput && {
       value: email,
       inputComponent: InputComponents.email,
       feedback: feedbackFactory('email'),
@@ -210,7 +210,7 @@ export default function useAuthForm(
         setEmailInputDisabled(isDisabled);
       },
     },
-    password: {
+    password: passwordInput && {
       value: password,
       inputComponent: InputComponents.password,
       feedback: feedbackFactory('password'),
@@ -218,7 +218,7 @@ export default function useAuthForm(
         setPasswordInputDisabled(isDisabled);
       },
     },
-    confirmPassword: {
+    confirmPassword: confirmPasswordInput && {
       value: confirmPassword,
       inputComponent: InputComponents.confirmPassword,
       feedback: feedbackFactory('confirmPassword'),
