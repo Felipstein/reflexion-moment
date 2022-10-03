@@ -14,7 +14,6 @@ route.get('/users', authMiddleware, UserController.index);
 route.get('/users/:id', authMiddleware, UserController.show);
 route.post('/users/', authMiddleware, UserController.store);
 route.put('/users/:id', authMiddleware, UserController.update);
-
 route.delete('/users/:id', authMiddleware, UserController.delete);
 
 module.exports = route;
