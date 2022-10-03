@@ -7,11 +7,11 @@ import Background from '../../components/Background';
 import Logo from '../../components/Logo';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import EventManager from '../../libs/EventManager';
 import useInputErrors from '../../hooks/useInputErrors';
 import isEmailValid from '../../utils/isEmailValid';
 import delay from '../../utils/delay';
 import { AuthContext } from '../../contexts/AuthContext';
+import toast from '../../utils/toast';
 
 import { Container, Wrapper } from './styles';
 
@@ -104,10 +104,8 @@ export default function Login() {
 
       await delay(1000);
       await login({ email, password });
-
-      EventManager.emit('addtoast', { content: 'Bem-vindo(a) de volta' });
     } catch (err) {
-      EventManager.emit('addtoast', { type: 'warn', content: err.message });
+      toast({ type: 'warn', content: err.message });
     } finally {
       setIsLoading(false);
     }
