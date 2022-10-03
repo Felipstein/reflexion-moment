@@ -1,34 +1,14 @@
 import React, { useContext, useState } from 'react';
+
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-
-import Overlay from '../../components/Overlay';
-import Background from '../../components/Background';
-import Logo from '../../components/Logo';
-import Button from '../../components/Button';
+import toast from '../../utils/toast';
 import Input from '../../components/Input';
-import EventManager from '../../libs/EventManager';
-import useInputErrors from '../../hooks/useInputErrors';
-import isEmailValid from '../../utils/isEmailValid';
+import AuthForm from '../../containers/AuthForm';
 import delay from '../../utils/delay';
+import isEmailValid from '../../utils/isEmailValid';
+import useInputErrors from '../../hooks/useInputErrors';
 import { AuthContext } from '../../contexts/AuthContext';
-
-import { Container, Wrapper } from './styles';
-
-const childVariants = {
-  init: {
-    scale: 1.1,
-    opacity: 0,
-  },
-  enter: {
-    scale: 1,
-    opacity: 1,
-    transition: {
-      delay: 0.3,
-      duration: 0.4,
-    },
-  },
-};
+import Button from '../../components/Button';
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
@@ -104,125 +84,68 @@ export default function Login() {
 
       await delay(1000);
       await login({ email, password });
-
-      EventManager.emit('addtoast', { content: 'Bem-vindo(a) de volta' });
     } catch (err) {
-      EventManager.emit('addtoast', { type: 'warn', content: err.message });
+      toast({ type: 'warn', content: err.message });
     } finally {
       setIsLoading(false);
     }
   }
 
   return (
-    <>
-      <Overlay zIndex={0} />
-      <Background size="45vw" />
-      <Wrapper>
-        <motion.div
-          initial={{ y: -20, opacity: 0, scale: 1.1 }}
-          animate={{
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            transition: {
-              duration: 0.3,
-            },
-          }}
+    <AuthForm
+      title="Bem-vindo(a) de volta!"
+      subTitle="Espero que tenha ótimas inspirações para hoje :)"
+      inputs={(
+        <>
+          <Input
+            className="form-input"
+            type="email"
+            placeholder="E-mail"
+            value={email}
+            onChange={handleEmailChange}
+            error={getMessageError('email')}
+            disabled={isLoading}
+          />
+          <Input
+            className="form-input"
+            type="password"
+            placeholder="Senha"
+            value={password}
+            onChange={handlePasswordChange}
+            error={getMessageError('password')}
+            disabled={isLoading}
+          />
+        </>
+      )}
+      subActions={(
+        <button
+          className="form-lost-password"
+          type="button"
+          onClick={handleLostPassword}
+          disabled={isLoading}
         >
-          <Logo scale={1.7} />
-        </motion.div>
-        <Container
-          as={motion.div}
-          initial={{ y: 40, opacity: 0 }}
-          animate={{
-            y: 0,
-            opacity: 1,
-            transition: {
-              duration: 0.5,
-            },
-          }}
-          className="app__box-shadow"
-        >
-          <motion.div
-            initial="init"
-            animate="enter"
-            className="wrapped-content"
+          Esqueci a senha :(
+        </button>
+      )}
+      actions={(
+        <>
+          <Link
+            to="/register"
+            className={`form-no-account${isLoading ? ' disabled' : ''}`}
+            disabled={isLoading}
           >
-            <motion.h1
-              variants={childVariants}
-            >
-              Bem vindo(a) de volta!
-            </motion.h1>
-            <motion.p
-              variants={childVariants}
-            >
-              Espero que tenha ótima inspirações para hoje :)
-            </motion.p>
-            <motion.form
-              variants={childVariants}
-              className="form-login"
-              onSubmit={handleSubmit}
-              noValidate
-            >
-              <div className="form-inputs">
-                <Input
-                  as={motion.div}
-                  variants={childVariants}
-                  className="form-input"
-                  type="email"
-                  placeholder="E-mail"
-                  value={email}
-                  onChange={handleEmailChange}
-                  error={getMessageError('email')}
-                  disabled={isLoading}
-                />
-                <Input
-                  as={motion.div}
-                  variants={childVariants}
-                  className="form-input"
-                  type="password"
-                  placeholder="Senha"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  error={getMessageError('password')}
-                  disabled={isLoading}
-                />
-              </div>
-              <div className="form-actions">
-                <motion.button
-                  variants={childVariants}
-                  className="form-lost-password"
-                  type="button"
-                  onClick={handleLostPassword}
-                  disabled={isLoading}
-                >
-                  Esqueci a senha :(
-                </motion.button>
-                <div className="form-main-actions">
-                  <Link
-                    as={motion.a}
-                    variants={childVariants}
-                    to="/register"
-                    className={`form-no-account${isLoading ? ' disabled' : ''}`}
-                    disabled={isLoading}
-                  >
-                    <span className="app__text-shadow">Não tenho uma conta</span>
-                  </Link>
-                  <Button
-                    as={motion.button}
-                    variants={childVariants}
-                    type="submit"
-                    disabled={!isFormValid}
-                    loading={isLoading}
-                  >
-                    Vamos lá!
-                  </Button>
-                </div>
-              </div>
-            </motion.form>
-          </motion.div>
-        </Container>
-      </Wrapper>
-    </>
+            <span className="app__text-shadow">Não tenho uma conta</span>
+          </Link>
+          <Button
+            type="submit"
+            disabled={!isFormValid}
+            loading={isLoading}
+          >
+            Vamos lá!
+          </Button>
+        </>
+      )}
+      onSubmit={handleSubmit}
+    />
   );
 }
