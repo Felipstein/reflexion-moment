@@ -7,4 +7,4 @@ route.post('/auth', (req, res) => {
   return authenticateController.safeHandle(req, res);
 });
 
-export { route };
+export { route as authRoutes };
