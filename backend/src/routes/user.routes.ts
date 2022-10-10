@@ -1,10 +1,10 @@
 import { Router } from "express";
 import ensureAuth from "../middlewares/ensureAuth";
-import { createUserController } from "../modules/Users/CreateUserService";
-import { deleteUsersController } from "../modules/Users/DeleteUserService";
-import { listAllUsersController } from "../modules/Users/LIstAllUsersService";
-import { listUserController } from "../modules/Users/ListUserService";
-import { updateUserController } from "../modules/Users/UpdateUserService";
+import { createUserController } from "../modules/Users/CreateUser";
+import { deleteUsersController } from "../modules/Users/DeleteUser";
+import { listAllUsersController } from "../modules/Users/LIstAllUsers";
+import { listUserController } from "../modules/Users/ListUser";
+import { updateUserController } from "../modules/Users/UpdateUser";
 
 const route = Router();
 
