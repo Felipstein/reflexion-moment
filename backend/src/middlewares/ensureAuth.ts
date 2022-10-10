@@ -1,6 +1,7 @@
 import { Response, NextFunction } from 'express';
 import { Request } from 'express';
 import jwt from 'jsonwebtoken';
+import { tokenProvider } from '../providers/TokenProvider';
 
 export default (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
@@ -19,12 +20,11 @@ export default (req: Request, res: Response, next: NextFunction) => {
     return res.sendStatus(401);
   }
 
-  try {
-    jwt.verify(token, process.env.SECRET_KEY!);
+  const tokenIsValid = tokenProvider.verify(token);
 
-    next();
-  } catch {
+  if(!tokenIsValid) {
     return res.sendStatus(401);
   }
-
+  
+  return next();
 }
