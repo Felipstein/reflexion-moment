@@ -2,6 +2,8 @@ import { UseCasesError } from './../../../errors/UseCasesError';
 import { AuthenticateDTO } from './AuthenticateDTO';
 import { IUsersRepository } from './../../../repositories/IUsersRepository';
 import { SuccessAuthenticateDTO } from './SuccessAuthenticateDTO';
+import { cryptProvider } from '../../../providers/CryptProvider';
+import { tokenProvider } from '../../../providers/TokenProvider';
 export class AuthenticateUseCases {
 
   constructor(
@@ -26,7 +28,13 @@ export class AuthenticateUseCases {
       throw new UseCasesError(400, 'Nenhum usuário encontrado com esse e-amil.');
     }
 
+    if(!await cryptProvider.matchPassword(user, password)) {
+      throw new UseCasesError(401, 'Senha incorreta.');
+    }
 
+    const token = tokenProvider.sign({ userId: user.id }, { expiresIn: '7d' });
+
+    return { user, token };
   }
 
 }
