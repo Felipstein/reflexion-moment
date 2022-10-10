@@ -1,8 +1,8 @@
 import { Response } from 'express';
 import { Request } from 'express';
 import { DeleteUserUseCases } from './DeleteUserUseCases';
-import { IController } from './../../../interfaces/IController';
-export class DeleteUserController implements IController {
+import { Controller } from './../../../abstracts/Controller';
+export class DeleteUserController mplements Controller {
 
   constructor(
     private deleteUserUseCases: DeleteUserUseCases,

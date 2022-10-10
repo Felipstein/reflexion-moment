@@ -1,13 +1,15 @@
 import { Request, Response } from 'express';
 
-import { IController } from './../../../interfaces/IController';
-import { ListAllUsersUseCase } from './ListAllUsersUseCase';
+import { Controller } from './../../../abstracts/Controller';
+import { ListAllUsersUseCases } from './ListAllUsersUseCases';
 
-export class ListAllUsersController implements IController {
+export class ListAllUsersController extends Controller {
 
   constructor(
-    private listAllUsersUseCase: ListAllUsersUseCase,
-  ) { }
+    private listAllUsersUseCase: ListAllUsersUseCases,
+  ) {
+    super();
+  }
 
   async handle(req: Request, res: Response): Promise<Response> {
     const users = await this.listAllUsersUseCase.execute();

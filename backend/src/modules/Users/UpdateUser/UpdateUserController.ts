@@ -2,12 +2,14 @@ import { UseCasesError } from './../../../errors/UseCasesError';
 import { UpdateUserUseCases } from './UpdateUserUseCases';
 import { Response } from 'express';
 import { Request } from 'express';
-import { IController } from './../../../interfaces/IController';
-export class UpdateUserController implements IController {
+import { Controller } from './../../../abstracts/Controller';
+export class UpdateUserController extends Controller {
 
   constructor(
     private updateUserUseCases: UpdateUserUseCases,
-  ) { }
+  ) {
+    super();
+  }
 
   async handle(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
