@@ -1,13 +1,15 @@
 import { UseCasesError } from './../../../errors/UseCasesError';
 import { Response } from 'express';
 import { Request } from 'express';
-import { IController } from './../../../interfaces/IController';
+import { Controller } from './../../../abstracts/Controller';
 import { CreateUserUseCases } from './CreateUserUseCases';
-export class CreateUserController implements IController {
+export class CreateUserController extends Controller {
 
   constructor(
     private createUserUseCases: CreateUserUseCases,
-  ) { };
+  ) {
+    super();
+  };
 
   async handle(req: Request, res: Response): Promise<Response> {
     const { name, email, password } = req.body;
