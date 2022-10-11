@@ -1,49 +1,76 @@
-import React, { useContext, useEffect, useState } from 'react';
-import api from '../../api';
-import { AuthContext } from '../../contexts/AuthContext';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
 
-export default function Home() {
-  const [users, setUsers] = useState([]);
-  const { logout } = useContext(AuthContext);
+import { ReactComponent as MenuDropdownIcon } from '../../assets/images/icons/menu-dropdown.svg';
 
-  useEffect(() => {
-    async function loadUsers() {
-      const { data: usersData } = await api.get('/users');
+import Logo from '../../components/Logo';
+import Background from '../../components/Background';
+import Button from '../../components/Button';
 
-      setUsers(usersData);
-    }
+import * as S from './styles';
 
-    loadUsers();
-  }, []);
+export default function Home({ hasPostButton }) {
+  const [dropdownMenuIsOpen, setDropdownMenuIsOpen] = useState(false);
+
+  function handleToggleDropdownMenu() {
+    setDropdownMenuIsOpen((prevState) => !prevState);
+  }
 
   return (
     <>
-      <h1>Usuários</h1>
-      <ul className="users">
-        {users && users.length > 0 && users.map((user) => (
-          <li key={user.id}>
-            <h3>
-              <strong>ID: </strong>
-              {user.id}
-            </h3>
-            <h3>
-              <strong>Nome: </strong>
-              {user.nome}
-            </h3>
-            <h3>
-              <strong>E-mail: </strong>
-              {user.email}
-            </h3>
-            <h3>
-              <strong>Senha: </strong>
-              {user.password}
-            </h3>
-          </li>
-        ))}
-      </ul>
-      <button type="button" onClick={logout}>
-        Sair
-      </button>
+      <Background />
+      <S.Container>
+        <S.Header>
+          <Logo />
+          <div className="menu-actions">
+            <motion.button
+              type="button"
+              id="btn-menu-dropdown"
+              onClick={handleToggleDropdownMenu}
+              whileHover={{
+                scale: 1.08,
+              }}
+              whileTap={{
+                scale: 0.95,
+              }}
+            >
+              <h2>Luís Felipe</h2>
+              <motion.div
+                className="menu-dropdown-icon"
+                animate={dropdownMenuIsOpen ? ({
+                  rotate: 180,
+                }) : ({
+                  rotate: 0,
+
+                })}
+                transition={{
+                  duration: 0.35,
+                  ease: 'easeOut',
+                }}
+              >
+                <MenuDropdownIcon />
+              </motion.div>
+            </motion.button>
+            {hasPostButton && (
+              <Button
+                type="button"
+                id="btn-new-post"
+              >
+                Novo post
+              </Button>
+            )}
+          </div>
+        </S.Header>
+      </S.Container>
     </>
   );
 }
+
+Home.propTypes = {
+  hasPostButton: PropTypes.bool,
+};
+
+Home.defaultProps = {
+  hasPostButton: true,
+};
