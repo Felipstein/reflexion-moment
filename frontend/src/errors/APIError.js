@@ -17,7 +17,7 @@ export default class APIError extends Error {
       return;
     }
 
-    this.message = data.error;
+    this.message = data.message;
     this.status = status;
   }
 }
