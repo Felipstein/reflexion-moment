@@ -1,15 +1,13 @@
 import { UseCasesError } from './../../../errors/UseCasesError';
 import { Response, Request } from 'express';
-import { Controller } from './../../../abstracts/Controller';
+import { IController } from './../../../interfaces/IController';
 import { AuthenticateUseCases } from './AuthenticateUseCases';
 
-export class AuthenticateController extends Controller {
+export class AuthenticateController implements IController {
 
   constructor(
     private authenticateUseCases: AuthenticateUseCases,
-  ) {
-    super();
-  }
+  ) { }
 
   async handle(req: Request, res: Response): Promise<Response> {
     const { email, password } = req.body;
