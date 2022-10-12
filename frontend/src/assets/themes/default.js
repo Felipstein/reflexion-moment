@@ -13,7 +13,7 @@ export default {
     backgrounds: {
       main: '#472D30',
       card: '#723D46',
-      cardFooter: 'rgba(0, 0, 0, 0.2)',
+      cardFooter: '#5b3138',
     },
     primary: {
       lighter: '#ED9E92',
