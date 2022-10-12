@@ -5,7 +5,7 @@ import { userRoutes } from './routes/user.routes';
 
 import { setupDotenv } from './config';
 import { authRoutes } from './routes/auth.routes';
-import verifyDatabase from './middlewares/verifyDatabase';
+import { verifyDatabase } from './middlewares/verifyDatabase';
 setupDotenv();
 
 const app = express();
@@ -16,6 +16,8 @@ const corsOptions: cors.CorsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(verifyDatabase);
+
+app.use(userRoutes);
 app.use(authRoutes)
 app.use(userRoutes);
 
