@@ -1,7 +1,9 @@
 import React from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Slot } from '@radix-ui/react-slot';
 import PropTypes from 'prop-types';
 
+import { useTheme } from 'styled-components';
 import Overlay from '../Overlay';
 
 import * as S from './styles';
@@ -16,6 +18,8 @@ export function DropdownMenuOverlay({ isOpened, ...props }) {
         right: '0',
         bottom: '0',
       }}
+      rgba="transparent"
+      blur={1.5}
       {...props}
     />
   );
@@ -30,10 +34,14 @@ DropdownMenuOverlay.defaultProps = {
 };
 
 export function DropdownMenuRoot({ isOpened, children }) {
-  return isOpened && (
-    <DropdownMenuContainer>
-      {children}
-    </DropdownMenuContainer>
+  return (
+    <AnimatePresence>
+      <DropdownMenuContainer
+        isOpened={isOpened}
+      >
+        {children}
+      </DropdownMenuContainer>
+    </AnimatePresence>
   );
 }
 
@@ -46,34 +54,89 @@ DropdownMenuRoot.defaultProps = {
   isOpened: false,
 };
 
-export function DropdownMenuContainer({ children }) {
+export function DropdownMenuContainer({ isOpened, children }) {
   return (
-    <S.Container>
+    <S.Container
+      initial={false}
+      animate={isOpened ? 'open' : 'closed'}
+      variants={{
+        open: {
+          clipPath: 'inset(0% 0% 0% 0% round 10px)',
+          pointerEvents: 'auto',
+          transition: {
+            type: 'spring',
+            bounce: 0,
+            duration: 0.7,
+            delayChildren: 0.3,
+            staggerChildren: 0.05,
+          },
+        },
+        closed: {
+          clipPath: 'inset(10% 50% 90% 50% round 10px)',
+          pointerEvents: 'none',
+          transition: {
+            type: 'spring',
+            bounce: 0,
+            duration: 0.3,
+          },
+        },
+      }}
+      style={{
+        pointerEvents: isOpened ? 'auto' : 'none',
+        display: isOpened ? 'flex' : 'none',
+      }}
+    >
       {children}
     </S.Container>
   );
 }
 
 DropdownMenuContainer.propTypes = {
+  isOpened: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
 };
 
-export function DropdownMenuItem({ children, asChild }) {
+export function DropdownMenuItem({ danger, children, asChild }) {
+  const theme = useTheme();
+
   const Comp = asChild ? Slot : 'button';
 
   return (
-    <Comp className="dropdownmenu-item">
-      {children}
+    <Comp className="dropdownmenu-item" style={danger ? { color: theme.colors.danger.dark } : { color: '#111' }}>
+      <motion.div
+        variants={{
+          open: {
+            opacity: 1,
+            y: 0,
+            transition: {
+              type: 'spring',
+              stiffness: 300,
+              damping: 24,
+            },
+          },
+          closed: {
+            opacity: 0,
+            y: 20,
+            transition: {
+              duration: 0.2,
+            },
+          },
+        }}
+      >
+        {children}
+      </motion.div>
     </Comp>
   );
 }
 
 DropdownMenuItem.propTypes = {
-  children: PropTypes.node.isRequired,
+  danger: PropTypes.bool,
+  children: PropTypes.string.isRequired,
   asChild: PropTypes.bool,
 };
 
 DropdownMenuItem.defaultProps = {
+  danger: false,
   asChild: false,
 };
 
