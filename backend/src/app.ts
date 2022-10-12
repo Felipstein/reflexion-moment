@@ -16,7 +16,9 @@ const corsOptions: cors.CorsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(verifyDatabase);
+
 app.use(userRoutes);
 app.use(authRoutes)
+app.use(userRoutes);
 
 export { app };

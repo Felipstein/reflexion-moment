@@ -10,5 +10,5 @@ export const verifyDatabase = (req: Request, res: Response, next: NextFunction) 
   } catch {
     return res.status(500).json({ message: 'Ocorreu um erro interno nos nossos servidores, tente novamente mais tarde.' });
   }
-
+  
 }
