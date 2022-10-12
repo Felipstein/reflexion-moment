@@ -9,9 +9,9 @@ export default function Logo({ scale, blackWhite }) {
       scale={scale}
       blackWhite={blackWhite}
     >
-      <h1>
+      <h1 id="logo-top">
         Momento de
-        <strong>Reflexão</strong>
+        <strong id="logo-bottom">Reflexão</strong>
       </h1>
     </S.Container>
   );

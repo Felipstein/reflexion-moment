@@ -18,49 +18,51 @@ export default function Header({ hasPostButton }) {
 
   return (
     <S.Container>
-      <Logo />
-      <div className="menu-actions">
-        <motion.button
-          type="button"
-          id="btn-menu-dropdown"
-          onClick={handleToggleDropdownMenu}
-          whileHover={{
-            scale: 1.08,
-          }}
-          whileTap={{
-            scale: 0.95,
-          }}
-        >
-          <h2>Luís Felipe</h2>
-          <motion.div
-            className="menu-dropdown-icon"
-            animate={dropdownMenuIsOpen ? ({
-              rotate: 180,
-            }) : ({
-              rotate: 0,
-            })}
-            transition={{
-              duration: 0.35,
-              ease: 'easeOut',
+      <div className="header-content">
+        <Logo />
+        <div className="menu-actions">
+          <motion.button
+            type="button"
+            id="btn-menu-dropdown"
+            onClick={handleToggleDropdownMenu}
+            whileHover={{
+              scale: 1.08,
+            }}
+            whileTap={{
+              scale: 0.95,
             }}
           >
-            <MenuDropdownIcon />
-          </motion.div>
-        </motion.button>
-        <HomeDropdownMenu
-          dropdownMenuIsOpen={dropdownMenuIsOpen}
-          onClose={handleToggleDropdownMenu}
-        />
-        {hasPostButton && (
-          <Button
-            type="button"
-            id="btn-new-post"
-          >
-            Novo post
-          </Button>
-        )}
+            <h2>Luís Felipe</h2>
+            <motion.div
+              className="menu-dropdown-icon"
+              animate={dropdownMenuIsOpen ? ({
+                rotate: 180,
+              }) : ({
+                rotate: 0,
+              })}
+              transition={{
+                duration: 0.35,
+                ease: 'easeOut',
+              }}
+            >
+              <MenuDropdownIcon />
+            </motion.div>
+          </motion.button>
+          <HomeDropdownMenu
+            dropdownMenuIsOpen={dropdownMenuIsOpen}
+            onClose={handleToggleDropdownMenu}
+          />
+          {hasPostButton && (
+            <Button
+              type="button"
+              id="btn-new-post"
+            >
+              Novo post
+            </Button>
+          )}
+        </div>
       </div>
-
+      <S.Separator />
     </S.Container>
   );
 }

@@ -25,4 +25,15 @@ export const Container = styled.div`
       }
     }
   `}
+
+  @media screen and (max-width: 390px) {
+    h1 {
+      font-size: calc(3.2rem * 0.7);
+      line-height: calc(4.0rem * 0.7);
+
+      strong {
+        font-size: calc(4.6rem * 0.8);
+      }
+    }
+  }
 `;

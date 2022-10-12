@@ -43,10 +43,30 @@ export const Main = styled.main`
     }
   }
 
+  @media screen and (max-width: 560px) {
+    flex-direction: column;
+    align-items: center;
+
+    #card-name {
+      margin-bottom: 1.2rem;
+    }
+
+    .card-date-wrapper {
+      align-items: center;
+    }
+  }
 `;
 
 export const Footer = styled.footer`
   padding: 1.2rem 1.6rem;
 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
   background-color: ${({ theme }) => theme.colors.backgrounds.cardFooter};
+
+  @media screen and (max-width: 560px) {
+    justify-content: center;
+  }
 `;

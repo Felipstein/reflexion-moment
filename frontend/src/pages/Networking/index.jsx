@@ -20,7 +20,7 @@ export default function Networking() {
 
         setUsers(usersData);
       } catch {
-        toast({ type: 'danger', content: 'Não conseguimos buscar alguns usuários, desculpe :(' });
+        toast({ type: 'danger', content: 'Não conseguimos buscar os usuários, desculpe :(' });
       } finally {
         setIsLoading(false);
       }
