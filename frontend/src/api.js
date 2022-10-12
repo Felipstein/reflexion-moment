@@ -49,6 +49,16 @@ class API {
       throw new APIError(err);
     }
   }
+
+  async listUsers() {
+    try {
+      const { data: users } = await this.api.get('/users');
+
+      return users;
+    } catch (err) {
+      throw new APIError(err);
+    }
+  }
 }
 
 const api = new API();
