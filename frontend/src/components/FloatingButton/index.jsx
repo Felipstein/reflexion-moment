@@ -6,12 +6,17 @@ import { Link } from 'react-router-dom';
 
 import * as S from './styles';
 
-export default function FloatingButton({ icon: Icon, children, asChild }) {
+export default function FloatingButton({
+  icon: Icon, children, asChild, ...props
+}) {
   const Comp = asChild ? Slot : Link;
 
   return (
     <S.Wrapper>
-      <Comp id="fbtn-root">
+      <Comp
+        id="fbtn-root"
+        {...props}
+      >
         <motion.div
           className="fbtn-inner"
           initial="reset"

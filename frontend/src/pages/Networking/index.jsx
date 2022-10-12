@@ -3,15 +3,20 @@ import { House } from 'phosphor-react';
 
 import FloatingButton from '../../components/FloatingButton';
 
+import * as S from './styles';
+
 export default function Networking() {
   return (
-    <>
-      <h1>Networking</h1>
-      <FloatingButton
-        icon={House}
-      >
-        Voltar para home
-      </FloatingButton>
-    </>
+    <S.Container>
+
+      <div className="floating-button-container">
+        <FloatingButton
+          icon={House}
+          to="/"
+        >
+          Voltar para home
+        </FloatingButton>
+      </div>
+    </S.Container>
   );
 }

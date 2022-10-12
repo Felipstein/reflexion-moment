@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  position: fixed;
-
-  top: 50%;
-  left: 50%;
+  position: absolute;
 
   #fbtn-root {
     width: auto;
