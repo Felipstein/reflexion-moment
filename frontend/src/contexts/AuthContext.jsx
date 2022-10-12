@@ -3,9 +3,7 @@ import React, {
 } from 'react';
 import PropType from 'prop-types';
 
-import api from '../api';
-import delay from '../utils/delay';
-import APIError from '../errors/APIError';
+import { api } from '../api';
 
 export const AuthContext = createContext();
 
@@ -24,11 +22,10 @@ export default function AuthProvider({ children }) {
       if (token) {
         try {
           setIsValidatingToken(true);
-          await delay(2000);
-          const { data: { user: userData } } = await api.post('/auth/validate', { token });
+          const { user: userData } = await api.validateToken(token);
 
           setUser(userData);
-          api.defaults.headers.common.Authorization = `Bearer ${token}`;
+          api.setDefaultHeader('Authorization', `Bearer ${token}`);
         } catch {
           removeToken();
         } finally {
@@ -43,27 +40,19 @@ export default function AuthProvider({ children }) {
   async function register({
     name, email, password, confirmPassword,
   }) {
-    try {
-      const { data: { user: userData, token } } = await api.post('auth/register', {
-        name, email, password, confirmPassword,
-      });
+    const { token, user: userData } = await api.registerUser({
+      name, email, password, confirmPassword,
+    });
 
-      setToken(token);
-      setUser(userData);
-    } catch (err) {
-      throw new APIError(err);
-    }
+    setToken(token);
+    setUser(userData);
   }
 
   async function login({ email, password }) {
-    try {
-      const { data: { user: userData, token } } = await api.post('/auth', { email, password });
+    const { token, user: userData } = await api.login({ email, password });
 
-      setToken(token);
-      setUser(userData);
-    } catch (err) {
-      throw new APIError(err);
-    }
+    setToken(token);
+    setUser(userData);
   }
 
   function logout() {
@@ -76,12 +65,12 @@ export default function AuthProvider({ children }) {
   }
 
   function setToken(token) {
-    api.defaults.headers.common.Authorization = `Bearer ${token}`;
+    api.setDefaultHeader('Authorization', `Bearer ${token}`);
     localStorage.setItem('auth::token', token);
   }
 
   function removeToken() {
-    api.defaults.headers.common.Authorization = null;
+    api.unsetDefaultHeader('Authorization');
     localStorage.removeItem('auth::token');
   }
 
