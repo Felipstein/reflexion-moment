@@ -5,9 +5,8 @@ import {
 } from 'react-router-dom';
 import { AuthContext } from './contexts/AuthContext';
 
-import Home from './pages/Home';
+import { HeaderLayout } from './containers/HeaderLayout';
 import Login from './pages/Login';
-import Networking from './pages/Networking';
 import Register from './pages/Register';
 
 function PrivateRoute({ children }) {
@@ -29,7 +28,7 @@ export default function MainRoutes() {
         path="/"
         element={(
           <PrivateRoute>
-            <Home />
+            <HeaderLayout.Home />
           </PrivateRoute>
         )}
       />
@@ -38,7 +37,7 @@ export default function MainRoutes() {
         path="/networking"
         element={(
           <PrivateRoute>
-            <Networking />
+            <HeaderLayout.Networking />
           </PrivateRoute>
         )}
       />

@@ -131,7 +131,7 @@ export function DropdownMenuItem({ danger, children, asChild }) {
 
 DropdownMenuItem.propTypes = {
   danger: PropTypes.bool,
-  children: PropTypes.string.isRequired,
+  children: PropTypes.any.isRequired,
   asChild: PropTypes.bool,
 };
 

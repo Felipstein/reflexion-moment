@@ -26,6 +26,13 @@ export const Container = styled(motion.ul)`
 
     font-size: 2rem;
 
+    text-align: center;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
     &:hover {
       background-color: #d1d5db;
     }
