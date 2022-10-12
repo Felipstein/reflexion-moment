@@ -34,6 +34,8 @@ export const Header = styled.header`
 
       margin-bottom: 0.8rem;
 
+      z-index: 6;
+
       h2 {
         color: ${({ theme }) => theme.colors.text};
         font-weight: 400;
@@ -58,5 +60,13 @@ export const Header = styled.header`
       width: 18rem;
       height: 4.5rem;
     }
+
   }
+  `;
+
+export const DropdownMenuContainer = styled.div`
+  position: fixed;
+  transform: translate(6rem, 4.2rem);
+
+  z-index: 4;
 `;

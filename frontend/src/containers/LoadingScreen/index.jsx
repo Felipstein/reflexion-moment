@@ -68,7 +68,7 @@ export default function LoadingScreen() {
           >
             <Background
               size="35vw"
-              zIndex={6}
+              zIndex={10}
             />
           </motion.div>
           <S.Container

@@ -9,6 +9,7 @@ import Background from '../../components/Background';
 import Button from '../../components/Button';
 
 import * as S from './styles';
+import { HomeDropdownMenu } from './HomeDropdownMenu';
 
 export default function Home({ hasPostButton }) {
   const [dropdownMenuIsOpen, setDropdownMenuIsOpen] = useState(false);
@@ -42,7 +43,6 @@ export default function Home({ hasPostButton }) {
                   rotate: 180,
                 }) : ({
                   rotate: 0,
-
                 })}
                 transition={{
                   duration: 0.35,
@@ -52,6 +52,10 @@ export default function Home({ hasPostButton }) {
                 <MenuDropdownIcon />
               </motion.div>
             </motion.button>
+            <HomeDropdownMenu
+              dropdownMenuIsOpen={dropdownMenuIsOpen}
+              onClose={handleToggleDropdownMenu}
+            />
             {hasPostButton && (
               <Button
                 type="button"

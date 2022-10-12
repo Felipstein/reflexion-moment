@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import * as S from './styles';
 
 export default function Overlay({
-  location, rgba, blur, zIndex,
+  location, rgba, blur, zIndex, ...props
 }) {
   return (
     <S.Overlay
@@ -12,6 +12,7 @@ export default function Overlay({
       rgba={rgba}
       blur={blur}
       zIndex={zIndex}
+      {...props}
     />
   );
 }
@@ -32,7 +33,7 @@ Overlay.propTypes = {
 Overlay.defaultProps = {
   rgba: 'rgba(0, 0, 0, 0.3)',
   blur: 3,
-  zIndex: '1',
+  zIndex: 1,
   location: {
     position: 'fixed',
     top: '0',

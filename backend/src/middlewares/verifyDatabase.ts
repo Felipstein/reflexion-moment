@@ -8,7 +8,9 @@ export const verifyDatabase = (req: Request, res: Response, next: NextFunction) 
 
     return next();
   } catch {
+    console.log('### Error Handler ####');
+
     return res.status(500).json({ message: 'Ocorreu um erro interno nos nossos servidores, tente novamente mais tarde.' });
   }
-  
+
 }

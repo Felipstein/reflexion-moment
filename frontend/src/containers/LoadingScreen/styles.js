@@ -13,7 +13,7 @@ export const Overlay = styled(motion.div)`
 
   background-color: #111;
 
-  z-index: 5;
+  z-index: 9;
 `;
 
 export const Container = styled(motion.div)`
@@ -75,7 +75,7 @@ export const Container = styled(motion.div)`
     }
   }
 
-  z-index: 6;
+  z-index: 10;
 
   @media screen and (max-height: 560px) {
     #overlay-main-text {
