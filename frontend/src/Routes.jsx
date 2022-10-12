@@ -7,6 +7,7 @@ import { AuthContext } from './contexts/AuthContext';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Networking from './pages/Networking';
 import Register from './pages/Register';
 
 function PrivateRoute({ children }) {
@@ -29,6 +30,15 @@ export default function MainRoutes() {
         element={(
           <PrivateRoute>
             <Home />
+          </PrivateRoute>
+        )}
+      />
+
+      <Route
+        path="/networking"
+        element={(
+          <PrivateRoute>
+            <Networking />
           </PrivateRoute>
         )}
       />
