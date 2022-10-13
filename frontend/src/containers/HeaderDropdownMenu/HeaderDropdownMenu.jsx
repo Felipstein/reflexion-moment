@@ -6,7 +6,7 @@ import { DropdownMenu } from '../../components/DropdownMenu/DropdownMenu';
 
 import * as S from './styles';
 
-export function HomeDropdownMenu({ dropdownMenuIsOpen, onClose }) {
+export function HeaderDropdownMenu({ dropdownMenuIsOpen, onClose }) {
   return (
     <>
       <DropdownMenu.Overlay
@@ -42,11 +42,11 @@ export function HomeDropdownMenu({ dropdownMenuIsOpen, onClose }) {
   );
 }
 
-HomeDropdownMenu.propTypes = {
+HeaderDropdownMenu.propTypes = {
   dropdownMenuIsOpen: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
 };
 
-HomeDropdownMenu.defaultProps = {
+HeaderDropdownMenu.defaultProps = {
   dropdownMenuIsOpen: false,
 };
