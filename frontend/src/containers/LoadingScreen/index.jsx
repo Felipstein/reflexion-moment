@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import { AuthContext } from '../../contexts/AuthContext';
 import Logo from '../../components/Logo';
+import Background from '../../components/Background';
 
 import * as S from './styles';
-import Background from '../../components/Background';
 
 const item = {
   prehidden: {

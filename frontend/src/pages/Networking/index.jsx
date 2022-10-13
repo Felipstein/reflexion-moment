@@ -10,6 +10,7 @@ import toast from '../../utils/toast';
 import { api } from '../../api';
 import UserCard from '../../containers/UserCard';
 import { AuthContext } from '../../contexts/AuthContext';
+import LoadingScreen from '../../containers/LoadingScreen';
 
 import * as S from './styles';
 import NoUsers from './NoUsers';
@@ -40,6 +41,8 @@ export default function Networking() {
 
   return (
     <S.Container>
+      <LoadingScreen />
+
       <S.Header>
         <div className="header-top">
           <h1 id="header-title">
@@ -57,18 +60,13 @@ export default function Networking() {
         )}
 
       </S.Header>
-      {isLoading && (
-        <h1>Carregando...</h1>
-      )}
 
-      {!isLoading && (
-        filteredUsers.map((userObj) => (
-          <UserCard
-            key={userObj.id}
-            user={userObj}
-          />
-        ))
-      )}
+      {filteredUsers.map((userObj) => (
+        <UserCard
+          key={userObj.id}
+          user={userObj}
+        />
+      ))}
 
       {filteredUsers.length === 0 && (
         <>
