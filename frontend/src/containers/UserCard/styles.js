@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 60vw;
-  max-width: 144rem;
-  margin: auto;
-  margin-top: 6.4rem;
   border-radius: 5px;
 
   background-color: ${({ theme }) => theme.colors.backgrounds.card};
