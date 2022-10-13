@@ -15,14 +15,21 @@ import delay from '../../utils/delay';
 
 import * as S from './styles';
 import NoUsers from './NoUsers';
+import NoUsersFound from './NoUsersFound';
 
 export default function Networking() {
   const loadScreen = useContext(LoadScreenContext);
   const { user } = useContext(AuthContext);
+
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
 
-  const filteredUsers = useMemo(() => users.filter((userObj) => userObj.id !== user.id), [users]);
+  const filteredUsers = useMemo(() => (
+    users.filter((userObj) => (
+      userObj.id !== user.id && userObj.name.includes(searchInput)
+    ))
+  ), [users, searchInput]);
 
   useEffect(() => {
     async function fetchData() {
@@ -47,6 +54,12 @@ export default function Networking() {
     loadScreen.setWhatIsLoading('Buscando usuários...');
   }, [isLoading]);
 
+  function handleSearchInputChange(event) {
+    event.preventDefault();
+
+    setSearchInput(event.target.value);
+  }
+
   return (
     <S.Container>
       <S.Header>
@@ -56,16 +69,22 @@ export default function Networking() {
           </h1>
         </div>
 
-        {filteredUsers.length > 0 && (
+        {users.length > 0 && (
           <div className="header-bottom">
             <Input
+              value={searchInput}
               type="text"
               placeholder="Procurar por nome..."
+              onChange={handleSearchInputChange}
             />
           </div>
         )}
 
       </S.Header>
+
+      {users.length > 0 && filteredUsers.length === 0 && (
+        <NoUsersFound termSearched={searchInput} />
+      )}
 
       {filteredUsers.map((userObj) => (
         <UserCard
@@ -74,7 +93,7 @@ export default function Networking() {
         />
       ))}
 
-      {filteredUsers.length === 0 && (
+      {users.length === 0 && (
         <>
           <Background />
           <NoUsers />

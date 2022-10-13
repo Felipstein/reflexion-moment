@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
 import { DropdownMenu } from '../../components/DropdownMenu/DropdownMenu';
 
 import * as S from './styles';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export function HeaderDropdownMenu({ dropdownMenuIsOpen, onClose }) {
+  const { logout } = useContext(AuthContext);
+
   return (
     <>
       <DropdownMenu.Overlay
@@ -32,7 +35,10 @@ export function HeaderDropdownMenu({ dropdownMenuIsOpen, onClose }) {
 
           <DropdownMenu.SeparatorItem />
 
-          <DropdownMenu.Item>
+          <DropdownMenu.Item
+            type="button"
+            onClick={logout}
+          >
             Sair
           </DropdownMenu.Item>
 

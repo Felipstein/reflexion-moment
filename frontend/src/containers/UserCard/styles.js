@@ -6,6 +6,10 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.backgrounds.card};
 
   overflow: hidden;
+
+  & + & {
+    margin-top: 2.4rem;
+  }
 `;
 
 export const Main = styled.main`

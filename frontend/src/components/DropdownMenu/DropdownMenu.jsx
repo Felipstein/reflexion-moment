@@ -96,13 +96,19 @@ DropdownMenuContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export function DropdownMenuItem({ danger, children, asChild }) {
+export function DropdownMenuItem({
+  danger, children, asChild, ...props
+}) {
   const theme = useTheme();
 
   const Comp = asChild ? Slot : 'button';
 
   return (
-    <Comp className="dropdownmenu-item" style={danger ? { color: theme.colors.danger.dark } : { color: '#111' }}>
+    <Comp
+      className="dropdownmenu-item"
+      style={danger ? { color: theme.colors.danger.dark } : { color: '#111' }}
+      {...props}
+    >
       <motion.div
         variants={{
           open: {

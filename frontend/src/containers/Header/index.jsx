@@ -6,7 +6,7 @@ import { ReactComponent as MenuDropdownIcon } from '../../assets/images/icons/me
 import Logo from '../../components/Logo';
 
 import * as S from './styles';
-import { HomeDropdownMenu } from '../../pages/Home/HomeDropdownMenu';
+import { HeaderDropdownMenu } from '../HeaderDropdownMenu';
 import Button from '../../components/Button';
 
 export default function Header({ hasPostButton }) {
@@ -48,7 +48,7 @@ export default function Header({ hasPostButton }) {
               <MenuDropdownIcon />
             </motion.div>
           </motion.button>
-          <HomeDropdownMenu
+          <HeaderDropdownMenu
             dropdownMenuIsOpen={dropdownMenuIsOpen}
             onClose={handleToggleDropdownMenu}
           />

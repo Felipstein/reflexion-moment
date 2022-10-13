@@ -5,8 +5,7 @@ export const Container = styled.div`
   width: 50vw;
   max-width: 144rem;
 
-  margin: auto;
-  margin-top: 3.2rem;
+  margin: 3.2rem auto 6.4rem auto;
 
   .floating-button-container {
     position: fixed;
@@ -100,4 +99,29 @@ export const NoUserContainer = styled.div`
   }
 
 
+`;
+
+export const NoUsersFoundContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+
+
+  span {
+    font-size: 2.4rem;
+    color: rgba(255, 255, 255, 0.6);
+    overflow-wrap: break-word;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  svg {
+    margin-right: 1.2rem;
+    font-size: 4.8rem;
+    min-width: fit-content;
+    color: ${({ theme }) => theme.colors.danger.main}
+  }
 `;
