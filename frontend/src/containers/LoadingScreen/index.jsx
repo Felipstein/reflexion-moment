@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { BounceLoader, PuffLoader } from 'react-spinners';
 import { motion, AnimatePresence } from 'framer-motion';
+import PropTypes from 'prop-types';
 
-import { AuthContext } from '../../contexts/AuthContext';
+import { LoadScreenContext } from '../../contexts/LoadScreenContext';
 import Logo from '../../components/Logo';
 import Background from '../../components/Background';
 
@@ -31,9 +32,8 @@ const item = {
   },
 };
 
-// done just to keep token validation time
-export default function LoadingScreen() {
-  const { isValidatingToken } = useContext(AuthContext);
+export default function LoadingScreen({ isLoading }) {
+  const loadingScreen = useContext(LoadScreenContext);
 
   useEffect(() => {
     document.body.style.overflow = 'unset';
@@ -45,7 +45,7 @@ export default function LoadingScreen() {
 
   return (
     <AnimatePresence>
-      {isValidatingToken && (
+      {(isLoading || loadingScreen.isLoading) && (
         <S.Wrapper>
           <S.Overlay
             exit={{
@@ -107,9 +107,11 @@ export default function LoadingScreen() {
               <motion.h1 id="overlay-main-text" variants={item}>
                 Espere um pouco
               </motion.h1>
-              <motion.h3 id="overlay-sub-text" variants={item}>
-                Estamos validando sua sessão...
-              </motion.h3>
+              {loadingScreen.whatIsLoading && (
+                <motion.h3 id="overlay-sub-text" variants={item}>
+                  {loadingScreen.whatIsLoading}
+                </motion.h3>
+              )}
             </div>
             <motion.footer className="overlay-footer" variants={item}>
               <span id="overlay-myself">
@@ -122,3 +124,11 @@ export default function LoadingScreen() {
     </AnimatePresence>
   );
 }
+
+LoadingScreen.propTypes = {
+  isLoading: PropTypes.bool,
+};
+
+LoadingScreen.defaultProps = {
+  isLoading: false,
+};

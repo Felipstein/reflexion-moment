@@ -10,12 +10,14 @@ import toast from '../../utils/toast';
 import { api } from '../../api';
 import UserCard from '../../containers/UserCard';
 import { AuthContext } from '../../contexts/AuthContext';
-import LoadingScreen from '../../containers/LoadingScreen';
+import { LoadScreenContext } from '../../contexts/LoadScreenContext';
+import delay from '../../utils/delay';
 
 import * as S from './styles';
 import NoUsers from './NoUsers';
 
 export default function Networking() {
+  const loadScreen = useContext(LoadScreenContext);
   const { user } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
@@ -26,6 +28,7 @@ export default function Networking() {
     async function fetchData() {
       try {
         setIsLoading(true);
+        await delay(2000);
         const usersData = await api.listUsers();
 
         setUsers(usersData);
@@ -39,10 +42,13 @@ export default function Networking() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    loadScreen.setIsLoading(isLoading);
+    loadScreen.setWhatIsLoading('Buscando usuários...');
+  }, [isLoading]);
+
   return (
     <S.Container>
-      <LoadingScreen />
-
       <S.Header>
         <div className="header-top">
           <h1 id="header-title">

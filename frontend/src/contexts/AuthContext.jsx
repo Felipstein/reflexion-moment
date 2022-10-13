@@ -1,13 +1,15 @@
 import React, {
-  createContext, useEffect, useMemo, useState,
+  createContext, useContext, useEffect, useMemo, useState,
 } from 'react';
 import PropType from 'prop-types';
 
 import { api } from '../api';
+import { LoadScreenContext } from './LoadScreenContext';
 
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
+  const loadScreen = useContext(LoadScreenContext);
   const [user, setUser] = useState(null);
   const [isValidatingToken, setIsValidatingToken] = useState(false);
 
@@ -36,6 +38,11 @@ export default function AuthProvider({ children }) {
 
     validateToken();
   }, []);
+
+  useEffect(() => {
+    loadScreen.setIsLoading(isValidatingToken);
+    loadScreen.setWhatIsLoading('Estamos validando sua sessão...');
+  }, [isValidatingToken]);
 
   async function register({
     name, email, password, confirmPassword,
