@@ -33,17 +33,15 @@ const variants = {
     }
    `,
   card: css`
-    color: ${({ theme }) => theme.colors.text};
+    color: #111;
     background-color: ${({ theme }) => theme.colors.secondary.main};
     border: 2px solid transparent;
 
     &:hover {
-      color: #fff;
       background-color: ${({ theme }) => theme.colors.secondary.light};
     }
 
     &:active {
-      color: #111;
       background-color: ${({ theme }) => theme.colors.secondary.lighter};
     }
   `,
@@ -60,7 +58,7 @@ export default styled(motion.button)`
   font-size: 1.8rem;
   font-weight: 500;
   text-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  
+
   ${({ variant }) => variants[variant] || variants.main}
 
   &[disabled] {
