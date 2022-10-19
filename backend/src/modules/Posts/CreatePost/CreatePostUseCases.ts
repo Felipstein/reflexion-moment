@@ -2,15 +2,15 @@ import { IUsersRepository } from './../../../repositories/IUsersRepository';
 import { UseCasesError } from './../../../errors/UseCasesError';
 import { Post } from './../../../entities/Post';
 import { IPostsRepository } from './../../../repositories/IPostsRepository';
-import { PostCreateDTO } from './PostCreateDTO';
-export class PostCreateUseCases {
+import { CreatePostDTO } from './CreatePostDTO';
+export class CreatePostUseCases {
 
   constructor(
     private usersRepository: IUsersRepository,
     private postsRepository: IPostsRepository,
   ) { }
 
-  async execute({ title, content, isShareable, userId }: PostCreateDTO): Promise<Post> {
+  async execute({ title, content, isShareable, userId }: CreatePostDTO): Promise<Post> {
     if (!title) {
       throw new UseCasesError(400, 'Título é obrigatório.');
     }

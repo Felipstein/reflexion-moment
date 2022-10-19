@@ -40,7 +40,7 @@ export class InMemoryUsersRepository implements IUsersRepository {
     });
   }
 
-  update(user: User): Promise<User | undefined> {
+  update(user: User): Promise<User> {
     return new Promise((resolve, reject) => {
       const emailAlreadyExists = this.users.find(userObj => userObj.email === user.email && userObj.id !== user.id);
       if (emailAlreadyExists) {

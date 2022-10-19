@@ -8,7 +8,7 @@ export class UpdateUserUseCases {
     private usersRepository: IUsersRepository,
   ) { }
 
-  async execute({ id, name, email, password }: UpdateUserDTO): Promise<User | undefined> {
+  async execute({ id, name, email, password }: UpdateUserDTO): Promise<User> {
     if (!id) {
       throw new UseCasesError(400, 'ID é obrigatório.');
     }

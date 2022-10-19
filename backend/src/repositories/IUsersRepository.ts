@@ -10,7 +10,7 @@ export interface IUsersRepository {
 
   save(user: User): Promise<User>;
 
-  update(user: User): Promise<User | undefined | null>;
+  update(user: User): Promise<User>;
 
   delete(id: string): Promise<void>;
 

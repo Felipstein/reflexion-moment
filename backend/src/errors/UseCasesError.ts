@@ -1,6 +1,6 @@
 export class UseCasesError extends Error {
 
-  readonly statusCode: number;
+  public readonly statusCode: number;
 
   constructor(statusCode: number, message?: string) {
     super(message ?? 'Erro desconhecido');

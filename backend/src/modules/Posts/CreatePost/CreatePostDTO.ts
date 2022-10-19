@@ -1,4 +1,4 @@
-export interface PostCreateDTO {
+export interface CreatePostDTO {
   title: string;
   content: string;
   isShareable?: boolean;

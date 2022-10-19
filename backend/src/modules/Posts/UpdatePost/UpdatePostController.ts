@@ -1,19 +1,20 @@
 import { UseCasesError } from './../../../errors/UseCasesError';
 import { Request, Response } from 'express';
-import { PostCreateUseCases } from './PostCreateUseCases';
+import { UpdatePostUseCases } from './UpdatePostUseCases';
 import { IController } from './../../../interfaces/IController';
 
-export class PostCreateController implements IController {
+export class UpdatePostController implements IController {
 
   constructor(
-    private postCreateUseCases: PostCreateUseCases,
+    private updatePostUseCases: UpdatePostUseCases,
   ) { }
 
   async handle(req: Request, res: Response): Promise<Response> {
-    const { title, content, isShareable, userId } = req.body;
+    const { id } = req.params;
+    const { title, content, isShareable, likes } = req.body;
 
     try {
-      const post = await this.postCreateUseCases.execute({ title, content, isShareable, userId });
+      const post = await this.updatePostUseCases.execute({ id, title, content, isShareable, likes });
 
       return res.status(201).json(post);
     } catch (err: UseCasesError | any) {
