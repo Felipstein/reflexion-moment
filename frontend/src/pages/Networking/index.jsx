@@ -11,7 +11,6 @@ import { api } from '../../api';
 import UserCard from '../../containers/UserCard';
 import { AuthContext } from '../../contexts/AuthContext';
 import { LoadScreenContext } from '../../contexts/LoadScreenContext';
-import delay from '../../utils/delay';
 
 import * as S from './styles';
 import NoUsers from './NoUsers';
@@ -35,7 +34,6 @@ export default function Networking() {
     async function fetchData() {
       try {
         setIsLoading(true);
-        await delay(2000);
         const usersData = await api.listUsers();
 
         setUsers(usersData);
@@ -50,8 +48,11 @@ export default function Networking() {
   }, []);
 
   useEffect(() => {
-    loadScreen.setIsLoading(isLoading);
-    loadScreen.setWhatIsLoading('Buscando usuários...');
+    if (isLoading) {
+      loadScreen.startLoadingStage({ stage: 'search-users', message: 'Buscando usuários...' });
+    } else {
+      loadScreen.stopLoadingStage('search-users');
+    }
   }, [isLoading]);
 
   function handleSearchInputChange(event) {

@@ -40,8 +40,11 @@ export default function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    loadScreen.setIsLoading(isValidatingToken);
-    loadScreen.setWhatIsLoading('Estamos validando sua sessão...');
+    if (isValidatingToken) {
+      loadScreen.startLoadingStage({ stage: 'session', message: 'Estamos validando sua sessão...' });
+    } else {
+      loadScreen.stopLoadingStage('session');
+    }
   }, [isValidatingToken]);
 
   async function register({

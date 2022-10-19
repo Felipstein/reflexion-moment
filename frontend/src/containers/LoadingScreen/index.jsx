@@ -107,9 +107,9 @@ export default function LoadingScreen({ isLoading }) {
               <motion.h1 id="overlay-main-text" variants={item}>
                 Espere um pouco
               </motion.h1>
-              {loadingScreen.whatIsLoading && (
+              {loadingScreen.getFirstLoadingStageMessage() && (
                 <motion.h3 id="overlay-sub-text" variants={item}>
-                  {loadingScreen.whatIsLoading}
+                  {loadingScreen.getFirstLoadingStageMessage()}
                 </motion.h3>
               )}
             </div>

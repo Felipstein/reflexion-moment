@@ -15,8 +15,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        loadScreen.setIsLoading(true);
-        loadScreen.setWhatIsLoading('Carregando posts...');
+        loadScreen.startLoadingStage({ stage: 'loading-posts', message: 'Carregando posts...' });
 
         const postsData = await api.listPosts();
 
@@ -24,7 +23,7 @@ export default function Home() {
       } catch (err) {
         setError(err.message);
       } finally {
-        loadScreen.setIsLoading(false);
+        loadScreen.stopLoadingStage('loading-posts');
       }
     }
 
