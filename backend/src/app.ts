@@ -10,7 +10,7 @@ import { verifyDatabase } from './middlewares/verifyDatabase';
 
 const app = express();
 const corsOptions: cors.CorsOptions = {
-  origin: 'http://localhost:3001',
+  origin: 'http://localhost:3000',
 }
 
 app.use(express.json());
